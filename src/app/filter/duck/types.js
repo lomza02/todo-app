@@ -1,0 +1,13 @@
+const SWITCH_FILTER = 'SWITCH_FILTER'
+
+const FILTER = {
+    SHOW_ALL: 'SHOW_ALL',
+    SHOW_COMPLETED: 'SHOW_COMPLETED',
+    SHOW_ACTIVE: 'SHOW_ACTIVE'
+}
+
+
+export default {
+    SWITCH_FILTER,
+    FILTER,
+}
