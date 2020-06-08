@@ -1,14 +1,19 @@
 import React from 'react';
 import ListItem from '../components/ListItem';
-import { connect } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import actions from '../duck/actions';
 import types from '../../filter/duck/types';
 
 
-const TodoList = ({ todos, switchTodo }) => {
+const TodoList = () => {
+    const todos = useSelector(state => state.todos);
+    const filter = useSelector(state => state.filter);
+    const dispatch = useDispatch()
+    const filtredTodos = filterList(todos, filter)
+
     return (
         <ul>
-            {todos.map(todo => <ListItem text={todo.text} completed={todo.completed} key={todo.id} onClick={() => switchTodo(todo.id)} />)}
+            {filtredTodos.map(todo => <ListItem text={todo.text} completed={todo.completed} key={todo.id} onClick={() => dispatch(actions.switchTodo(todo.id))} />)}
         </ul>
     );
 }
@@ -25,13 +30,4 @@ const filterList = (todos, activeFilter) => {
 
 }
 
-const mapStateToProps = state => ({
-    todos: filterList(state.todos, state.filter),
-})
-
-
-const mapDispatchToProps = dispatch => ({
-    switchTodo: (id) => dispatch(actions.switchTodo(id))
-})
-
-export default connect(mapStateToProps, mapDispatchToProps)(TodoList);
+export default TodoList;

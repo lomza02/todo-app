@@ -16,7 +16,6 @@ const todos = (state = initialState, action) => {
         case type.SWITCH_TODO:
             return state.map(todo => {
                 const isToggled = todo.id === action.id;
-                console.log(todo.id, action.id)
                 return {
                     ...todo,
                     completed: isToggled ? !todo.completed : todo.completed,

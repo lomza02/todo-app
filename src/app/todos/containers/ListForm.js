@@ -1,8 +1,11 @@
 import React from 'react';
-import { connect } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import actions from '../duck/actions';
 
-const ListForm = ({ addTask }) => {
+const ListForm = () => {
+    const dispatch = useDispatch();
+    const addTask = (text) => dispatch(actions.addTask(text))
+
     const textInput = React.createRef();
     const handleSubmitTask = (event) => {
         event.preventDefault();
@@ -19,8 +22,5 @@ const ListForm = ({ addTask }) => {
         </form>
     );
 }
-const mapDispatchToProps = dispatch => ({
-    addTask: (text) => dispatch(actions.addTask(text))
-})
 
-export default connect(null, mapDispatchToProps)(ListForm);
+export default ListForm;
